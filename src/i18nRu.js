@@ -9,7 +9,7 @@ const common = {
     loanFor:"Займ на ",
     formInvalidInterestRate1: "Процентная ставка должна иметь не более двух знаков после запятой и быть в пределах от ",
     formInvalidInterestRate2: " до ",
-    formInvalidLoanTerm1: "Сумма кредита должна быть в пределах от ",
+    formInvalidLoanTerm1: "Сумма займа должна быть в пределах от ",
     formInvalidLoanTerm2: " до ",
     tableCol1:"Номер платежа",
     tableCol2:"Месяц/Год",
