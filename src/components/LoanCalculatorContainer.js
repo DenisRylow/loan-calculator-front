@@ -20,25 +20,26 @@ class LoanCalculatorContainer extends React.Component {
         this.onInterestInput = this.onInterestInput.bind(this);
         this.onLoanSumChange = this.onLoanSumChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        const loadFunc = ({data}) => {
+            const processedData = { 
+                ...data,
+                maxLoanInterestRate: data.maxLoanInterestRate/100,
+                minLoanInterestRate: data.minLoanInterestRate/100,
+                defaultLoanInterestRate: data.defaultLoanInterestRate/100,
+            };
+            console.log('Loaded loan info: ', processedData);
+            this.setState(
+                {
+                    loaded: true,
+                    data: processedData,
+                    loanValidationFunc: validateLoanSum(processedData.minLoanSum,processedData.maxLoanSum),
+                    interestValidationFunc: validateInterestRate(processedData.minLoanInterestRate,processedData.maxLoanInterestRate),
+                }
+            );
+        }
         this.loadLoanFunc = loadLoan()
-            .then(({data}) => {
-                const processedData = { 
-                    ...data,
-                    maxLoanInterestRate: data.maxLoanInterestRate/100,
-                    minLoanInterestRate: data.minLoanInterestRate/100,
-                    defaultLoanInterestRate: data.defaultLoanInterestRate/100,
-                };
-                console.log('Loaded loan info: ', processedData);
-                this.setState(
-                    {
-                        loaded: true,
-                        data: processedData,
-                        loanValidationFunc: validateLoanSum(processedData.minLoanSum,processedData.maxLoanSum),
-                        interestValidationFunc: validateInterestRate(processedData.minLoanInterestRate,processedData.maxLoanInterestRate),
-                    }
-                );
-            })
-            .catch(setTimeout(loanRequestTimeOut, this.loadLoanFunc));
+            .then(loadFunc)
+            .catch((err) => {console.log("Failed to load data.")});
     }
 
     onTermSelect(value) {
