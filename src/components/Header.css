@@ -1,0 +1,21 @@
+.header {
+    background-color: cadetblue;
+    height: 100px;
+  }
+
+  .text {
+    color: white;
+    padding: 10px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items:flex-end;
+  }
+  
+  .calc {
+    font-size: x-large;
+  }
+
+  .company {
+    font-size: xx-large;
+  }
