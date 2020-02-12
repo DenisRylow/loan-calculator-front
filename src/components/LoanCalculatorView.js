@@ -5,12 +5,27 @@ import Form from 'react-bootstrap/Form';
 import Dropdown from 'react-bootstrap/Dropdown';
 import './LoanCalculatorView.css';
 import Table from 'react-bootstrap/Table';
+import {numberOfDigitsPastFractionDelimiter} from '../config';
 
 class LoanCalculatorView extends React.Component {
 
     constructor(props, context) {
         super(props, context);
         this.props = props;
+    }
+
+    formatMoney(value) {
+        const castValue = "" + value;
+        const position = castValue.indexOf('.');
+        if (Number.isInteger(value) || position == -1) {
+            return value;
+        } 
+        const fractionLength = castValue.length - position - 1;
+        if (fractionLength < numberOfDigitsPastFractionDelimiter) {
+            return castValue + "0".repeat(numberOfDigitsPastFractionDelimiter - fractionLength); 
+        } else {
+            return castValue;
+        }
     }
 
     render() {
@@ -94,10 +109,10 @@ class LoanCalculatorView extends React.Component {
                                 <tr key={ind}>
                                     <td>{ind + 1}</td>
                                     <td>{value.month + 1}/{value.year}</td>
-                                    <td>{value.paymentToPrincipal}</td>
-                                    <td>{value.paymentToInterest}</td>
-                                    <td>{value.debt}</td>
-                                    <td>{value.totalPayment}</td>
+                                    <td>{this.formatMoney(value.paymentToPrincipal)}</td>
+                                    <td>{this.formatMoney(value.paymentToInterest)}</td>
+                                    <td>{this.formatMoney(value.debt)}</td>
+                                    <td>{this.formatMoney(value.totalPayment)}</td>
                                 </tr>
                             );
                         })}

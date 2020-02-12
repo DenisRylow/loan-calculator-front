@@ -1,5 +1,5 @@
 const validateInterestRate = (min, max) => (value) => {
-    var re = /^[0-9]+(\.[0-9]{1,2})?$/;
+    const re = /^[0-9]+(\.[0-9]{1,2})?$/;
     if (!re.test(value)) {
         return false;
     }
@@ -7,7 +7,7 @@ const validateInterestRate = (min, max) => (value) => {
 }
 
 const validateLoanSum = (minSum, maxSum) => (value) => {
-    var re = /^[0-9]+$/;
+    const re = /^[0-9]+$/;
     if (!re.test(value)) {
         return false;
     }
