@@ -1,7 +1,6 @@
 import React from 'react';
 import LoanCalculatorView from './LoanCalculatorView';
 import {loadLoan, getSchedule} from '../LoanService';
-import {loanRequestTimeOut} from '../config';
 import {validateInterestRate, validateLoanSum} from '../ValidationService.js';
 
 class LoanCalculatorContainer extends React.Component {
